@@ -71,6 +71,7 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::ToolStripMenuItem^ binaryToolStripMenuItem;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::ToolStripMenuItem^ continuousToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
 		   /// </summary>
 		System::ComponentModel::Container^ components;
 
@@ -96,10 +97,11 @@ namespace CppCLRWinformsProjekt {
 			this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->trainingToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->binaryToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->continuousToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->continuousToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -215,9 +217,9 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// processToolStripMenuItem
 			// 
-			this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->initialToolStripMenuItem,
-					this->trainingToolStripMenuItem
+					this->trainingToolStripMenuItem, this->exitToolStripMenuItem
 			});
 			this->processToolStripMenuItem->Name = L"processToolStripMenuItem";
 			this->processToolStripMenuItem->Size = System::Drawing::Size(59, 20);
@@ -250,9 +252,16 @@ namespace CppCLRWinformsProjekt {
 			// binaryToolStripMenuItem
 			// 
 			this->binaryToolStripMenuItem->Name = L"binaryToolStripMenuItem";
-			this->binaryToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->binaryToolStripMenuItem->Size = System::Drawing::Size(136, 22);
 			this->binaryToolStripMenuItem->Text = L"Binary";
 			this->binaryToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::binaryToolStripMenuItem_Click);
+			// 
+			// continuousToolStripMenuItem
+			// 
+			this->continuousToolStripMenuItem->Name = L"continuousToolStripMenuItem";
+			this->continuousToolStripMenuItem->Size = System::Drawing::Size(136, 22);
+			this->continuousToolStripMenuItem->Text = L"Continuous";
+			this->continuousToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::continuousToolStripMenuItem_Click);
 			// 
 			// label4
 			// 
@@ -281,12 +290,12 @@ namespace CppCLRWinformsProjekt {
 			this->label6->TabIndex = 7;
 			this->label6->Text = L"label6";
 			// 
-			// continuousToolStripMenuItem
+			// exitToolStripMenuItem
 			// 
-			this->continuousToolStripMenuItem->Name = L"continuousToolStripMenuItem";
-			this->continuousToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->continuousToolStripMenuItem->Text = L"Continuous";
-			this->continuousToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::continuousToolStripMenuItem_Click);
+			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->exitToolStripMenuItem->Text = L"Exit";
+			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -603,5 +612,8 @@ namespace CppCLRWinformsProjekt {
 		//===========================================================
 		label5->Text = "x1 = " + mean_of_x1 + " |||| x2 = " + mean_of_x2;
 	}//* Normalize data
+	private: System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		Application::Exit();
+	}
 };
 }
