@@ -25,3 +25,10 @@ float* Add_Labels(float* Labels, int Size, int label) {
 int YPoint(int x, float* w, int Carpan) {
 	return (int)((double)(-1 * (double)Carpan * w[2] - 1 * (w[0] * x)) / (double)(w[1]));
 }
+
+int sgn(float net) {
+	if (net >= 0)
+		return 1;
+	else
+		return -1;
+}
