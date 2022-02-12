@@ -59,6 +59,8 @@ namespace CppCLRWinformsProjekt {
 		int  numClass = 0, numSample = 0, inputDim = 2;
 		float* Samples, * targets;
 		float* weights;
+		float* tmp_samples;
+
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ processToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ initialToolStripMenuItem;
@@ -68,6 +70,7 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::ToolStripMenuItem^ trainingToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ binaryToolStripMenuItem;
 	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::ToolStripMenuItem^ continuousToolStripMenuItem;
 		   /// </summary>
 		System::ComponentModel::Container^ components;
 
@@ -96,6 +99,7 @@ namespace CppCLRWinformsProjekt {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->continuousToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -235,7 +239,10 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// trainingToolStripMenuItem
 			// 
-			this->trainingToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->binaryToolStripMenuItem });
+			this->trainingToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->binaryToolStripMenuItem,
+					this->continuousToolStripMenuItem
+			});
 			this->trainingToolStripMenuItem->Name = L"trainingToolStripMenuItem";
 			this->trainingToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->trainingToolStripMenuItem->Text = L"Training";
@@ -273,6 +280,13 @@ namespace CppCLRWinformsProjekt {
 			this->label6->Size = System::Drawing::Size(35, 13);
 			this->label6->TabIndex = 7;
 			this->label6->Text = L"label6";
+			// 
+			// continuousToolStripMenuItem
+			// 
+			this->continuousToolStripMenuItem->Name = L"continuousToolStripMenuItem";
+			this->continuousToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->continuousToolStripMenuItem->Text = L"Continuous";
+			this->continuousToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::continuousToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -460,5 +474,77 @@ namespace CppCLRWinformsProjekt {
 	}//Binary training
 
 
+	private: System::Void continuousToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		int samples_size = numSample * inputDim;
+		normalize(Samples, samples_size);
+	}
+
+	void normalize(float* samples, int size) {
+		//for (int i = 0; i < size; i++)
+		//	samples[i] /= (pictureBox1->Width);
+
+		float sum_of_x1 = 0, sum_of_x2 = 0;
+		float mean_of_x1, mean_of_x2;
+		float* tmp_sample_x1 = new float[numSample];
+		float* tmp_sample_x2 = new float[numSample];
+		float sum_of_tmp_samples_x1 = 0, sum_of_tmp_samples_x2 = 0;
+		float ss1, ss2;
+
+		tmp_samples = new float[numSample * inputDim];
+		//==================== mean of samples ======================
+
+		for (int i = 0; i < numSample * inputDim; i++) {
+			if (i % 2 == 0) {
+				sum_of_x1 += samples[i];
+			}
+			else
+			{
+				sum_of_x2 += samples[i];
+			}
+		}
+		mean_of_x1 = sum_of_x1 / numSample;
+		mean_of_x2 = sum_of_x2 / numSample;
+		//===========================================================
+
+		//======================== standart sapma====================
+		for (int i = 0; i < numSample * inputDim; i++) {
+			if (i % 2 == 0) {
+				tmp_sample_x1[i] = samples[i] - mean_of_x1;
+				tmp_sample_x1[i] = tmp_sample_x1[i] * tmp_sample_x1[i];
+			}
+			else
+			{
+				tmp_sample_x2[i] = samples[i] - mean_of_x2;
+				tmp_sample_x2[i] = tmp_sample_x2[i] * tmp_sample_x2[i];
+			}
+		}
+		for (int i = 0; i < numSample * inputDim; i++) {
+			if (i % 2 == 0) {
+				sum_of_tmp_samples_x1 += tmp_sample_x1[i];
+			}
+			else
+			{
+				sum_of_tmp_samples_x2 += tmp_sample_x2[i];
+			}
+		}
+		ss1 = sum_of_tmp_samples_x1 / (numSample - 1);
+		ss1 = sqrt(ss1);
+		ss2 = sum_of_tmp_samples_x2 / (numSample - 1);
+		ss2 = sqrt(ss2);
+		//===========================================================
+
+		//======================== Normalize data====================
+		for (int i = 0; i < numSample * inputDim; i++) {
+			if (i % 2 == 0) {
+				samples[i] = (samples[i] - mean_of_x1) / ss1;
+			}
+			else
+			{
+				samples[i] = (samples[i] - mean_of_x2) / ss2;
+			}
+		}
+		//===========================================================
+		label5->Text = "x1 = " + mean_of_x1 + " |||| x2 = " + mean_of_x2;
+	}//* Normalize data
 };
 }
