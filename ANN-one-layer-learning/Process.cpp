@@ -1,4 +1,6 @@
 #include "pch.h"
+#include "Process.h"
+#include <cmath>
 
 float* Add_Data(float* sample, int Size, float* x, int Dim) {
 	float* temp;
@@ -31,4 +33,12 @@ int sgn(float net) {
 		return 1;
 	else
 		return -1;
+}
+
+float sigmoid(float net) {
+	return (1.0 / (1.0 + pow(euler, -net)));
+}
+
+float sigmoid_bipolar(float net) {
+	return ((2 / (1 + pow(euler, -net))) - 1);
 }
