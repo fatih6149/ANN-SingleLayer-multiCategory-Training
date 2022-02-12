@@ -21,3 +21,7 @@ float* Add_Labels(float* Labels, int Size, int label) {
 	delete[] Labels;
 	return temp;
 }
+
+int YPoint(int x, float* w, int Carpan) {
+	return (int)((double)(-1 * (double)Carpan * w[2] - 1 * (w[0] * x)) / (double)(w[1]));
+}
