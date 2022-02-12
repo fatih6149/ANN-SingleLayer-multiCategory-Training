@@ -1,5 +1,16 @@
 ﻿  CppCLR_WinformsProjekt.cpp
-E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(374,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(378,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(388,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(392,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(506,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Process.cpp
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Process.cpp(39,14): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Process.cpp(43,39): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Training_rules.cpp
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Training_rules.cpp(31,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Training_rules.cpp(42,52): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Training_rules.cpp(70,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Training_rules.cpp(88,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Training_rules.cpp(101,63): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   ANN-one-layer-learning.vcxproj -> E:\github\fatih6149-ANN-one-layer-learning\Debug\ANN-one-layer-learning.exe
