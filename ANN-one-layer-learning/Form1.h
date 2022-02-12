@@ -457,6 +457,8 @@ namespace CppCLRWinformsProjekt {
 			}
 			pictureBox1->CreateGraphics()->DrawLine(pen, (pictureBox1->Width / 2) + min_x, (pictureBox1->Height / 2) - min_y, (pictureBox1->Width / 2) + max_x, (pictureBox1->Height / 2) - max_y);
 		}
-	}
+	}//Binary training
+
+
 };
 }
