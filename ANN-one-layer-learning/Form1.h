@@ -4,6 +4,8 @@
 #include "pch.h"
 #include <iostream>
 
+#include "Training_rules.h"
+
 namespace CppCLRWinformsProjekt {
 
 	using namespace System;
@@ -65,6 +67,7 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::ToolStripMenuItem^ trainingToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ binaryToolStripMenuItem;
+	private: System::Windows::Forms::Label^ label6;
 		   /// </summary>
 		System::ComponentModel::Container^ components;
 
@@ -88,10 +91,11 @@ namespace CppCLRWinformsProjekt {
 			this->processToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->trainingToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->binaryToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -225,9 +229,23 @@ namespace CppCLRWinformsProjekt {
 			// randomlyToolStripMenuItem
 			// 
 			this->randomlyToolStripMenuItem->Name = L"randomlyToolStripMenuItem";
-			this->randomlyToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->randomlyToolStripMenuItem->Size = System::Drawing::Size(128, 22);
 			this->randomlyToolStripMenuItem->Text = L"Randomly";
 			this->randomlyToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::randomlyToolStripMenuItem_Click);
+			// 
+			// trainingToolStripMenuItem
+			// 
+			this->trainingToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->binaryToolStripMenuItem });
+			this->trainingToolStripMenuItem->Name = L"trainingToolStripMenuItem";
+			this->trainingToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->trainingToolStripMenuItem->Text = L"Training";
+			// 
+			// binaryToolStripMenuItem
+			// 
+			this->binaryToolStripMenuItem->Name = L"binaryToolStripMenuItem";
+			this->binaryToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->binaryToolStripMenuItem->Text = L"Binary";
+			this->binaryToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::binaryToolStripMenuItem_Click);
 			// 
 			// label4
 			// 
@@ -247,25 +265,21 @@ namespace CppCLRWinformsProjekt {
 			this->label5->TabIndex = 6;
 			this->label5->Text = L"label5";
 			// 
-			// trainingToolStripMenuItem
+			// label6
 			// 
-			this->trainingToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->binaryToolStripMenuItem });
-			this->trainingToolStripMenuItem->Name = L"trainingToolStripMenuItem";
-			this->trainingToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->trainingToolStripMenuItem->Text = L"Training";
-			// 
-			// binaryToolStripMenuItem
-			// 
-			this->binaryToolStripMenuItem->Name = L"binaryToolStripMenuItem";
-			this->binaryToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->binaryToolStripMenuItem->Text = L"Binary";
-			this->binaryToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::binaryToolStripMenuItem_Click);
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(883, 382);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(35, 13);
+			this->label6->TabIndex = 7;
+			this->label6->Text = L"label6";
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1173, 633);
+			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
@@ -388,7 +402,61 @@ namespace CppCLRWinformsProjekt {
 	}//Randomly
 
 	private: System::Void binaryToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		int min_x, max_x, min_y, max_y;
 
+		pictureBox1->Refresh();
+		for (int i = 0; i < numSample; i++) {
+			int temp_x = Convert::ToInt32(Samples[i * inputDim] + (pictureBox1->Width >> 1));
+			int temp_y = Convert::ToInt32((pictureBox1->Height >> 1) - Samples[i * inputDim + 1]);
+
+
+			Pen^ pen;// = gcnew Pen(Color::Black, 3.0f);
+			switch ((int)(targets[i])) {
+			case 0: pen = gcnew Pen(Color::Black, 3.0f); break;
+			case 1: pen = gcnew Pen(Color::Red, 3.0f); break;
+			case 2: pen = gcnew Pen(Color::Blue, 3.0f); break;
+			case 3: pen = gcnew Pen(Color::Pink, 3.0f); break;
+			case 4: pen = gcnew Pen(Color::Yellow, 3.0f); break;
+			case 5: pen = gcnew Pen(Color::Orange, 3.0f); break;
+			case 6: pen = gcnew Pen(Color::Pink, 3.0f); break;
+			default: pen = gcnew Pen(Color::YellowGreen, 3.0f);
+			}
+			pictureBox1->CreateGraphics()->DrawLine(pen, temp_x - 5, temp_y, temp_x + 5, temp_y);
+			pictureBox1->CreateGraphics()->DrawLine(pen, temp_x, temp_y - 5, temp_x, temp_y + 5);
+		}
+
+		bool state = true;
+		float Error;
+		int cycle = 0;
+		int bias = 1;
+
+		do {
+			cycle++;
+			Error = perceptron_Train(Samples, numSample, weights, bias, targets, numClass, inputDim);
+			if (Error == 0)
+				state = false;
+		} while (state);
+		label6->Text = " Cycle = " + System::Convert::ToString(cycle);
+
+		for (int label = 0; label < numClass; label++) {
+			min_x = (this->pictureBox1->Width) / -2;
+			min_y = YPoint(min_x, &weights[3 * label]);
+			max_x = (this->pictureBox1->Width) / 2;
+			max_y = YPoint(max_x, &weights[3 * label]);
+
+			Pen^ pen;// = gcnew Pen(Color::Black, 3.0f);
+			switch (label) {
+			case 0: pen = gcnew Pen(Color::Black, 3.0f); break;
+			case 1: pen = gcnew Pen(Color::Red, 3.0f); break;
+			case 2: pen = gcnew Pen(Color::Blue, 3.0f); break;
+			case 3: pen = gcnew Pen(Color::Pink, 3.0f); break;
+			case 4: pen = gcnew Pen(Color::Yellow, 3.0f); break;
+			case 5: pen = gcnew Pen(Color::Orange, 3.0f); break;
+			case 6: pen = gcnew Pen(Color::Pink, 3.0f); break;
+			default: pen = gcnew Pen(Color::YellowGreen, 3.0f);
+			}
+			pictureBox1->CreateGraphics()->DrawLine(pen, (pictureBox1->Width / 2) + min_x, (pictureBox1->Height / 2) - min_y, (pictureBox1->Width / 2) + max_x, (pictureBox1->Height / 2) - max_y);
+		}
 	}
 };
 }

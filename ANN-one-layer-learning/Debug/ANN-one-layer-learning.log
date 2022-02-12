@@ -1,7 +1,5 @@
 ﻿  CppCLR_WinformsProjekt.cpp
-E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(339,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(343,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Process.cpp
-  Generating Code...
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(374,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\github\fatih6149-ANN-one-layer-learning\ANN-one-layer-learning\Form1.h(378,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   ANN-one-layer-learning.vcxproj -> E:\github\fatih6149-ANN-one-layer-learning\Debug\ANN-one-layer-learning.exe
