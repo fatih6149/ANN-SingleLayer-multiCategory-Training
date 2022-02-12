@@ -477,11 +477,11 @@ namespace CppCLRWinformsProjekt {
 	private: System::Void continuousToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		int samples_size = numSample * inputDim;
 		normalize(Samples, samples_size);
+
+
 	}
 
 	void normalize(float* samples, int size) {
-		//for (int i = 0; i < size; i++)
-		//	samples[i] /= (pictureBox1->Width);
 
 		float sum_of_x1 = 0, sum_of_x2 = 0;
 		float mean_of_x1, mean_of_x2;
@@ -506,7 +506,7 @@ namespace CppCLRWinformsProjekt {
 		mean_of_x2 = sum_of_x2 / numSample;
 		//===========================================================
 
-		//======================== standart sapma====================
+		//======================== standard deviation====================
 		for (int i = 0; i < numSample * inputDim; i++) {
 			if (i % 2 == 0) {
 				tmp_sample_x1[i] = samples[i] - mean_of_x1;
