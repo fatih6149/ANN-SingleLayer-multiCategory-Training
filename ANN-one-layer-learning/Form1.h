@@ -1,5 +1,8 @@
 #pragma once
 #include "Process.h"
+#include "time.h"
+#include "pch.h"
+#include <iostream>
 
 namespace CppCLRWinformsProjekt {
 
@@ -53,7 +56,14 @@ namespace CppCLRWinformsProjekt {
 		/// User Defined Variables
 		int  numClass = 0, numSample = 0, inputDim = 2;
 		float* Samples, * targets;
-		/// </summary>
+		float* weights;
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ processToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ initialToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ randomlyToolStripMenuItem;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Label^ label5;
+		   /// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -72,9 +82,16 @@ namespace CppCLRWinformsProjekt {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->ClassNoBox = (gcnew System::Windows::Forms::ComboBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->processToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// pictureBox1
@@ -175,15 +192,67 @@ namespace CppCLRWinformsProjekt {
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"label3";
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->processToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(1173, 24);
+			this->menuStrip1->TabIndex = 4;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// processToolStripMenuItem
+			// 
+			this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->initialToolStripMenuItem });
+			this->processToolStripMenuItem->Name = L"processToolStripMenuItem";
+			this->processToolStripMenuItem->Size = System::Drawing::Size(59, 20);
+			this->processToolStripMenuItem->Text = L"Process";
+			// 
+			// initialToolStripMenuItem
+			// 
+			this->initialToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->randomlyToolStripMenuItem });
+			this->initialToolStripMenuItem->Name = L"initialToolStripMenuItem";
+			this->initialToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->initialToolStripMenuItem->Text = L"Initial";
+			// 
+			// randomlyToolStripMenuItem
+			// 
+			this->randomlyToolStripMenuItem->Name = L"randomlyToolStripMenuItem";
+			this->randomlyToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->randomlyToolStripMenuItem->Text = L"Randomly";
+			this->randomlyToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::randomlyToolStripMenuItem_Click);
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(883, 317);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(35, 13);
+			this->label4->TabIndex = 5;
+			this->label4->Text = L"label4";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(883, 351);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(35, 13);
+			this->label5->TabIndex = 6;
+			this->label5->Text = L"label5";
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1173, 633);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"Form1";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
@@ -191,6 +260,8 @@ namespace CppCLRWinformsProjekt {
 			this->groupBox1->PerformLayout();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -230,9 +301,10 @@ namespace CppCLRWinformsProjekt {
 				case 0: pen = gcnew Pen(Color::Black, 3.0f); break;
 				case 1: pen = gcnew Pen(Color::Red, 3.0f); break;
 				case 2: pen = gcnew Pen(Color::Blue, 3.0f); break;
-				case 3: pen = gcnew Pen(Color::Green, 3.0f); break;
+				case 3: pen = gcnew Pen(Color::Pink, 3.0f); break;
 				case 4: pen = gcnew Pen(Color::Yellow, 3.0f); break;
 				case 5: pen = gcnew Pen(Color::Orange, 3.0f); break;
+				case 6: pen = gcnew Pen(Color::Pink, 3.0f); break;
 				default: pen = gcnew Pen(Color::YellowGreen, 3.0f);
 				}//switch
 				pictureBox1->CreateGraphics()->DrawLine(pen, temp_x - 5, temp_y, temp_x + 5, temp_y);
@@ -254,7 +326,44 @@ namespace CppCLRWinformsProjekt {
 		// Network is constructed
 		numClass = Convert::ToInt32(ClassCountBox->Text);
 
+		weights = new float[numClass * 3];
+
 		button1->Text = " Network is Ready : ";
 	}
-	};
+
+	private: System::Void randomlyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		Pen^ pen = gcnew Pen(Color::Blue, 3.0f);
+
+		int min_x, max_x, min_y, max_y;
+
+		srand(time(0));
+
+		for (int label = 0; label < numClass; label++) {
+			for (int i = 0; i < inputDim + 1; i++)
+				weights[3 * label + i] = ((double)rand()) / (RAND_MAX);
+
+			label3->Text = " w[0]: " + System::Convert::ToString(weights[3 * label]);
+			label4->Text = " w[1]: " + System::Convert::ToString(weights[3 * label + 1]);
+			label5->Text = " w[2]: " + System::Convert::ToString(weights[3 * label + 2]);
+
+			min_x = (this->pictureBox1->Width) / -2;
+			min_y = YPoint(min_x, &weights[3 * label]);
+			max_x = (this->pictureBox1->Width) / 2;
+			max_y = YPoint(max_x, &weights[3 * label]);
+
+			Pen^ pen;// = gcnew Pen(Color::Black, 3.0f);
+			switch (label) {
+			case 0: pen = gcnew Pen(Color::Black, 3.0f); break;
+			case 1: pen = gcnew Pen(Color::Red, 3.0f); break;
+			case 2: pen = gcnew Pen(Color::Blue, 3.0f); break;
+			case 3: pen = gcnew Pen(Color::Pink, 3.0f); break;
+			case 4: pen = gcnew Pen(Color::Yellow, 3.0f); break;
+			case 5: pen = gcnew Pen(Color::Orange, 3.0f); break;
+			case 6: pen = gcnew Pen(Color::Pink, 3.0f); break;
+			default: pen = gcnew Pen(Color::YellowGreen, 3.0f);
+			}
+			pictureBox1->CreateGraphics()->DrawLine(pen, (pictureBox1->Width / 2) + min_x, (pictureBox1->Height / 2) - min_y, (pictureBox1->Width / 2) + max_x, (pictureBox1->Height / 2) - max_y);
+		}
+	}
+};
 }
