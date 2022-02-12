@@ -63,6 +63,8 @@ namespace CppCLRWinformsProjekt {
 	private: System::Windows::Forms::ToolStripMenuItem^ randomlyToolStripMenuItem;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::ToolStripMenuItem^ trainingToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ binaryToolStripMenuItem;
 		   /// </summary>
 		System::ComponentModel::Container^ components;
 
@@ -88,6 +90,8 @@ namespace CppCLRWinformsProjekt {
 			this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->trainingToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->binaryToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -203,7 +207,10 @@ namespace CppCLRWinformsProjekt {
 			// 
 			// processToolStripMenuItem
 			// 
-			this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->initialToolStripMenuItem });
+			this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->initialToolStripMenuItem,
+					this->trainingToolStripMenuItem
+			});
 			this->processToolStripMenuItem->Name = L"processToolStripMenuItem";
 			this->processToolStripMenuItem->Size = System::Drawing::Size(59, 20);
 			this->processToolStripMenuItem->Text = L"Process";
@@ -239,6 +246,20 @@ namespace CppCLRWinformsProjekt {
 			this->label5->Size = System::Drawing::Size(35, 13);
 			this->label5->TabIndex = 6;
 			this->label5->Text = L"label5";
+			// 
+			// trainingToolStripMenuItem
+			// 
+			this->trainingToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->binaryToolStripMenuItem });
+			this->trainingToolStripMenuItem->Name = L"trainingToolStripMenuItem";
+			this->trainingToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->trainingToolStripMenuItem->Text = L"Training";
+			// 
+			// binaryToolStripMenuItem
+			// 
+			this->binaryToolStripMenuItem->Name = L"binaryToolStripMenuItem";
+			this->binaryToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->binaryToolStripMenuItem->Text = L"Binary";
+			this->binaryToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::binaryToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -364,6 +385,10 @@ namespace CppCLRWinformsProjekt {
 			}
 			pictureBox1->CreateGraphics()->DrawLine(pen, (pictureBox1->Width / 2) + min_x, (pictureBox1->Height / 2) - min_y, (pictureBox1->Width / 2) + max_x, (pictureBox1->Height / 2) - max_y);
 		}
+	}//Randomly
+
+	private: System::Void binaryToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
 	}
 };
 }
